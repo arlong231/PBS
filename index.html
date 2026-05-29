@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>교실 속 문제행동 가이드 v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #1a7a6e;
+  --teal-light: #2ea893;
+  --teal-pale: #e8f5f3;
+  --teal-mid: #b8ddd9;
+  --amber: #d97706;
+  --amber-light: #fef3c7;
+  --amber-mid: #fcd34d;
+  --coral: #dc2626;
+  --coral-light: #fef2f2;
+  --coral-mid: #fca5a5;
+  --navy: #1e293b;
+  --slate: #475569;
+  --muted: #64748b;
+  --smoke: #f8fafc;
+  --border: #e2e8f0;
+  --white: #fff;
+  --text: #1e293b;
+  --purple: #7c3aed;
+  --purple-light: #ede9fe;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans KR', sans-serif; background: var(--smoke); color: var(--text); font-size: 14px; line-height: 1.7; }
+
+/* HEADER */
+.hd { background: var(--navy); color: white; position: sticky; top: 0; z-index: 100; }
+.hd-inner { max-width: 1060px; margin: 0 auto; padding: 0 20px; height: 54px; display: flex; align-items: center; justify-content: space-between; }
+.hd-logo { display: flex; align-items: center; gap: 9px; }
+.hd-icon { width: 30px; height: 30px; background: var(--teal-light); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+.hd-title { font-size: 13px; font-weight: 700; line-height: 1.4; }
+.hd-title small { display: block; font-size: 10px; color: #94a3b8; font-weight: 400; letter-spacing: .1px; }
+.hd-badge { background: rgba(46,168,147,.2); color: #7fd9ce; border: 1px solid rgba(127,217,206,.3); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: .3px; }
+.hd-dl-btn { background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.2); font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 7px; text-decoration: none; transition: all .15s; white-space: nowrap; }
+.hd-dl-btn:hover { background: rgba(255,255,255,.2); color: white; }
+
+/* LAYOUT */
+.wrap { max-width: 1060px; margin: 0 auto; padding: 28px 20px 60px; display: grid; grid-template-columns: 230px 1fr; gap: 22px; align-items: start; }
+
+/* SIDEBAR */
+.sidebar { position: sticky; top: 70px; }
+.sb-box { background: white; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+.sb-head { background: var(--teal); color: white; font-size: 11px; font-weight: 700; padding: 9px 14px; letter-spacing: .4px; text-transform: uppercase; }
+.sb-list { list-style: none; }
+.sb-list li button { width: 100%; text-align: left; background: none; border: none; border-bottom: 1px solid #f0f5f4; padding: 10px 14px; font-size: 13px; font-family: inherit; color: var(--text); cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all .14s; }
+.sb-list li:last-child button { border-bottom: none; }
+.sb-list li button:hover { background: var(--teal-pale); color: var(--teal); }
+.sb-list li button.active { background: var(--teal-pale); color: var(--teal); font-weight: 700; border-left: 3px solid var(--teal); }
+.sb-tag { font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 600; margin-left: auto; }
+.tag-r { background: var(--coral-light); color: var(--coral); }
+.tag-a { background: var(--amber-light); color: var(--amber); }
+.tag-t { background: var(--teal-pale); color: var(--teal); }
+
+/* PANELS */
+.content { min-width: 0; }
+.panel { display: none; animation: fi .2s ease; }
+.panel.on { display: block; }
+@keyframes fi { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+/* CARD WRAPPER */
+.card { background: white; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.05); }
+.card-head { padding: 16px 22px 13px; border-bottom: 1px solid var(--border); }
+.card-head h2 { font-size: 17px; font-weight: 900; color: var(--navy); margin-bottom: 2px; letter-spacing: -.3px; }
+.card-head p { font-size: 12px; color: var(--muted); }
+.card-body { padding: 16px 22px 20px; }
+
+/* ── PBS 4단계 (맨 위) ── */
+.pbs-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.pbs-step { background: var(--smoke); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; transition: box-shadow .15s; }
+.pbs-step:hover { box-shadow: 0 3px 10px rgba(26,122,110,.1); }
+.pbs-step .ps-icon { font-size: 22px; flex-shrink: 0; line-height: 1; }
+.pbs-step .ps-q { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 1px; }
+.pbs-step .ps-desc { font-size: 11px; color: var(--muted); }
+
+/* ── A안: 유형 카드 ── */
+.ab-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 6px; }
+.type-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+.type-card { border: 2px solid; border-radius: 12px; padding: 18px 16px; cursor: pointer; transition: all .15s; text-align: center; }
+.type-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.1); }
+.type-card .tc-icon { font-size: 26px; margin-bottom: 8px; }
+.type-card .tc-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.type-card .tc-desc { font-size: 11px; opacity: .8; line-height: 1.5; }
+.tc-산만 { border-color: var(--amber-mid); background: var(--amber-light); color: #92400e; }
+.tc-방해 { border-color: var(--teal-mid); background: var(--teal-pale); color: var(--teal); }
+.tc-공격 { border-color: var(--coral-mid); background: var(--coral-light); color: var(--coral); }
+
+/* ── B안: 6버튼 ── */
+.six-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+.six-btn { background: white; border: 1.5px solid var(--border); border-radius: 10px; padding: 14px 16px; cursor: pointer; text-align: left; transition: all .15s; display: flex; align-items: center; gap: 12px; font-family: inherit; }
+.six-btn:hover { border-color: var(--teal); background: var(--teal-pale); box-shadow: 0 3px 10px rgba(26,122,110,.1); }
+.six-btn.active { border-color: var(--teal); background: var(--teal-pale); }
+.six-btn .sb-num { width: 28px; height: 28px; border-radius: 50%; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sb-num-a { background: var(--amber-light); color: var(--amber); }
+.sb-num-t { background: var(--teal-pale); color: var(--teal); }
+.sb-num-r { background: var(--coral-light); color: var(--coral); }
+.six-btn .sb-text { font-size: 13px; font-weight: 600; color: var(--navy); }
+.six-btn .sb-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+/* 유형 구분선 */
+.type-divider { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; padding: 6px 0 4px; grid-column: 1 / -1; display: flex; align-items: center; gap: 6px; }
+.td-a { color: var(--amber); }
+.td-t { color: var(--teal); }
+.td-r { color: var(--coral); }
+.td-line { flex: 1; height: 1px; background: currentColor; opacity: .25; }
+
+/* AB 전환 토글 */
+.ab-toggle { display: flex; gap: 0; margin-bottom: 16px; background: var(--smoke); border: 1.5px solid var(--border); border-radius: 10px; padding: 4px; width: fit-content; }
+.ab-btn { border: none; background: transparent; border-radius: 7px; padding: 8px 20px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; color: var(--muted); transition: all .16s; letter-spacing: -.1px; }
+.ab-btn.on { background: var(--navy); color: white; box-shadow: 0 2px 6px rgba(0,0,0,.18); }
+.ab-toggle-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.ab-notice { font-size: 11px; color: var(--muted); background: var(--smoke); border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; margin-left: 10px; display: flex; align-items: center; }
+
+/* ── 사례 상세 (탭형) ── */
+.case-detail { display: none; }
+.case-detail.on { display: block; animation: fi .2s ease; }
+
+.case-title-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.case-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+.cb-a { background: var(--amber-light); color: var(--amber); border: 1px solid var(--amber-mid); }
+.cb-t { background: var(--teal-pale); color: var(--teal); border: 1px solid var(--teal-mid); }
+.cb-r { background: var(--coral-light); color: var(--coral); border: 1px solid var(--coral-mid); }
+.case-title-bar h3 { font-size: 16px; font-weight: 900; color: var(--navy); flex: 1; }
+.back-btn { background: var(--smoke); border: 1px solid var(--border); border-radius: 7px; padding: 6px 12px; font-size: 12px; font-family: inherit; cursor: pointer; color: var(--slate); transition: all .14s; }
+.back-btn:hover { background: var(--border); }
+
+/* 탭 */
+.case-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 0; overflow-x: auto; }
+.ctab { background: none; border: none; font-family: inherit; font-size: 12px; font-weight: 600; color: var(--muted); padding: 9px 14px 11px; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: all .14s; }
+.ctab:hover { color: var(--teal); }
+.ctab.on { color: var(--teal); border-bottom-color: var(--teal); }
+
+.ctab-panel { display: none; padding: 20px 0 0; }
+.ctab-panel.on { display: block; animation: fi .18s ease; }
+
+/* 탭 내용 공통 */
+.info-block { border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; border-left: 4px solid; }
+.ib-purple { background: #f5f3ff; border-color: var(--purple); }
+.ib-teal { background: var(--teal-pale); border-color: var(--teal); }
+.ib-amber { background: var(--amber-light); border-color: var(--amber); }
+.ib-coral { background: var(--coral-light); border-color: var(--coral); }
+.ib-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 5px; }
+.ib-purple .ib-label { color: var(--purple); }
+.ib-teal .ib-label { color: var(--teal); }
+.ib-amber .ib-label { color: var(--amber); }
+.ib-coral .ib-label { color: var(--coral); }
+.ib-content { font-size: 13px; }
+.ib-content ul { padding-left: 16px; }
+.ib-content ul li { margin-bottom: 3px; }
+
+/* 스크립트 박스 */
+.script { background: var(--navy); color: white; border-radius: 8px; padding: 12px 14px; margin-top: 8px; font-size: 13px; line-height: 1.8; }
+.script::before { content: '💬 교사 언어 예시'; display: block; font-size: 10px; color: #7fd9ce; font-weight: 700; margin-bottom: 5px; letter-spacing: .3px; }
+.script em { color: #ffd166; font-style: normal; }
+
+/* 팁 */
+.tip { background: var(--amber-light); border: 1px solid var(--amber-mid); border-radius: 8px; padding: 11px 14px; font-size: 12px; margin-top: 10px; }
+.tip strong { color: var(--amber); display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .3px; margin-bottom: 3px; }
+
+/* PBS 칩 */
+.pbs-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.pbs-chip { font-size: 11px; background: var(--teal-pale); color: var(--teal); border: 1px solid var(--teal-mid); padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+
+/* 위기 흐름도 */
+.flow { display: flex; flex-direction: column; gap: 0; }
+.flow-row { display: flex; gap: 0; }
+.flow-line-col { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
+.f-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--teal); margin-top: 14px; z-index: 1; }
+.f-line { width: 2px; flex: 1; background: var(--teal-mid); min-height: 16px; }
+.flow-row:last-child .f-line { display: none; }
+.flow-content { flex: 1; border: 1px solid var(--border); border-radius: 9px; padding: 11px 14px; margin: 6px 0; font-size: 13px; background: white; }
+.flow-content strong { display: block; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.flow-content p { font-size: 12px; color: var(--muted); }
+.badge-row { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
+.fbadge { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+.fb-g { background: var(--teal-pale); color: var(--teal); }
+.fb-r { background: var(--coral-light); color: var(--coral); }
+.fb-b { background: var(--purple-light); color: var(--purple); }
+
+/* 전략 그리드 */
+.strat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.strat-card { border: 1px solid var(--border); border-radius: 10px; padding: 14px; background: white; cursor: default; }
+.strat-card .sc-icon { font-size: 20px; margin-bottom: 6px; }
+.strat-card .sc-title { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+.strat-card .sc-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+/* PBS 전략 카드 (사례 상세 내 PBS 전략 탭용) */
+.pbs-strat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pbs-strat-card { border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; background: white; }
+.psc-head { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+.psc-icon { font-size: 18px; flex-shrink: 0; }
+.psc-title { font-size: 13px; font-weight: 700; color: var(--navy); flex: 1; }
+.psc-cat { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; flex-shrink: 0; white-space: nowrap; }
+.psc-cat-예방 { background: var(--teal-pale); color: var(--teal); border: 1px solid var(--teal-mid); }
+.psc-cat-교수 { background: var(--purple-light); color: var(--purple); border: 1px solid #c4b5fd; }
+.psc-cat-강화 { background: var(--amber-light); color: var(--amber); border: 1px solid var(--amber-mid); }
+.psc-cat-타임아웃 { background: var(--coral-light); color: var(--coral); border: 1px solid var(--coral-mid); }
+.psc-body { font-size: 12px; color: var(--slate); line-height: 1.7; }
+.psc-example { margin-top: 8px; background: var(--smoke); border-left: 3px solid var(--teal-mid); border-radius: 0 6px 6px 0; padding: 6px 10px; font-size: 11px; color: var(--teal); font-weight: 600; }
+
+/* 전략 탭 */
+.strat-tabs { display: flex; gap: 3px; margin-bottom: 14px; flex-wrap: wrap; }
+.stabtn { border: 1.5px solid var(--border); background: white; border-radius: 7px; padding: 6px 13px; font-size: 12px; font-weight: 600; font-family: inherit; cursor: pointer; color: var(--muted); transition: all .13s; }
+.stabtn.on { background: var(--teal); color: white; border-color: var(--teal); }
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  .wrap { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+  .type-cards { grid-template-columns: 1fr; }
+  .six-btns { grid-template-columns: 1fr; }
+  .pbs-4 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="hd-inner">
+    <div class="hd-logo">
+      <div class="hd-icon">🏫</div>
+      <div class="hd-title">(중등) 교실 속 문제행동 빠르게 예방하고, 바르게 가르치기!<small>서울특별시교육청 (2024.12)</small></div>
+    </div>
+    <div class="hd-badge">PBS 기반 생활교육</div>
+    <a href="https://buseo.sen.go.kr/buseo/bu15/user/bbs/BD_selectBbs.do?q_bbsSn=1331&q_bbsDocNo=20241216174527964" target="_blank" class="hd-dl-btn">📥 원자료 내려받기</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar">
+  <div class="sb-box">
+    <div class="sb-head">📚 메뉴</div>
+    <ul class="sb-list">
+      <li><button onclick="go('home')" id="mn-home" class="active">🏠 가이드 소개</button></li>
+      <li><button onclick="go('cases')" id="mn-cases">📋 사례별 지도 <span class="sb-tag tag-t">6건</span></button></li>
+      <li><button onclick="go('strat')" id="mn-strat">🎯 PBS 전략 모음</button></li>
+      <li><button onclick="go('crisis')" id="mn-crisis">🚨 위기행동 대응 <span class="sb-tag tag-r">중요</span></button></li>
+    </ul>
+  </div>
+  <div class="sb-box">
+    <div class="sb-head">⚡ 빠른 찾기 — 교사 언어 예시 바로가기</div>
+    <ul class="sb-list">
+      <li><button onclick="openCase('c1','script')">수업 중 자리 이탈</button></li>
+      <li><button onclick="openCase('c2','script')">스마트기기 사용</button></li>
+      <li><button onclick="openCase('c3','script')">엎드려 잠자기</button></li>
+      <li><button onclick="openCase('c4','script')">언쟁·반박 행동</button></li>
+      <li><button onclick="openCase('c5','script')">조별활동 중 몸싸움</button></li>
+      <li><button onclick="openCase('c6','script')">욕설·교사 항의</button></li>
+    </ul>
+  </div>
+</aside>
+
+<!-- ── CONTENT ── -->
+<main class="content">
+
+<!-- ════════ HOME ════════ -->
+<div id="panel-home" class="panel on">
+  <div class="card">
+    <div class="card-head">
+      <h2>긍정적 행동지원(PBS)의 핵심 4단계</h2>
+      <p>모든 생활지도의 출발점 — 먼저 이 4단계를 이해하고 시작하세요.</p>
+    </div>
+    <div class="card-body">
+      <div class="pbs-4">
+        <div class="pbs-step"><div class="ps-icon">❓</div><div class="ps-q">왜 이런 행동을 할까?</div><div class="ps-desc">선입견 없이 질문으로 시작하기</div></div>
+        <div class="pbs-step"><div class="ps-icon">💡</div><div class="ps-q">아! 그랬구나</div><div class="ps-desc">행동 속에 숨겨진 말 알아차리기</div></div>
+        <div class="pbs-step"><div class="ps-icon">🤔</div><div class="ps-q">어떻게 도와줄까?</div><div class="ps-desc">행동을 예방하는 방법 고민</div></div>
+        <div class="pbs-step"><div class="ps-icon">✅</div><div class="ps-q">이렇게 행동해보자</div><div class="ps-desc">더 나은 행동을 지도하기</div></div>
+      </div>
+
+      <div style="background:var(--smoke);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">📖 이 가이드 구성</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+          <div style="background:var(--teal-pale);border:1px solid var(--teal-mid);border-radius:8px;padding:10px 12px;font-size:12px;display:flex;align-items:center;gap:8px;">
+            <span style="font-size:18px;flex-shrink:0;">📋</span>
+            <div><div style="font-weight:700;color:var(--teal);">제1장 · 사례별 지도</div><div style="color:var(--muted);font-size:11px;">6가지 상황별 즉각 대응</div></div>
+          </div>
+          <div style="background:var(--amber-light);border:1px solid var(--amber-mid);border-radius:8px;padding:10px 12px;font-size:12px;display:flex;align-items:center;gap:8px;">
+            <span style="font-size:18px;flex-shrink:0;">🎯</span>
+            <div><div style="font-weight:700;color:var(--amber);">제2장 · PBS 전략 모음</div><div style="color:var(--muted);font-size:11px;">예방·교수·강화·타임아웃</div></div>
+          </div>
+          <div style="background:var(--coral-light);border:1px solid var(--coral-mid);border-radius:8px;padding:10px 12px;font-size:12px;display:flex;align-items:center;gap:8px;">
+            <span style="font-size:18px;flex-shrink:0;">🚨</span>
+            <div><div style="font-weight:700;color:var(--coral);">제3장 · 위기행동 대응</div><div style="color:var(--muted);font-size:11px;">심화 시 3단계 절차</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block ib-teal">
+        <div class="ib-label">활용 방법</div>
+        <div class="ib-content">
+          <ul>
+            <li><strong>지금 당장 필요하다면</strong> → 왼쪽 <strong>'빠른 찾기'</strong>에서 상황 클릭</li>
+            <li><strong>학기 초 준비하려면</strong> → <strong>[PBS 전략]</strong> 탭에서 예방 전략 확인</li>
+            <li><strong>반복되는 학생이 있다면</strong> → ABC 관찰기록지로 행동 기능 파악</li>
+            <li><strong>심각하게 악화됐다면</strong> → <strong>[위기행동 대응]</strong> 탭의 3단계 절차 확인</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:13px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:.4px; margin-bottom:3px;">📄 원출처</div>
+          <div style="font-size:12px; color:#1e293b;">서울특별시교육청 민주시민생활교육과 (2024.12)<br>
+          <span style="color:#64748b; font-size:11px;">교실 속 문제행동 빠르게 예방하고, 바르게 가르치기! (중등)</span></div>
+        </div>
+        <a href="https://buseo.sen.go.kr/buseo/bu15/user/bbs/BD_selectBbs.do?q_bbsSn=1331&q_bbsDocNo=20241216174527964" target="_blank"
+           style="display:inline-flex; align-items:center; gap:6px; background:#1a7a6e; color:white; text-decoration:none; font-size:12px; font-weight:700; padding:8px 16px; border-radius:8px; white-space:nowrap; flex-shrink:0; transition:background .15s;"
+           onmouseover="this.style.background='#2ea893'" onmouseout="this.style.background='#1a7a6e'">
+          📥 원자료 내려받기
+        </a>
+      </div>
+
+      <div style="margin-top:14px; background:white; border:1px solid #e2e8f0; border-radius:10px; overflow:hidden;">
+        <div style="background:#1e293b; color:white; padding:11px 16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;">
+          <div style="font-size:13px; font-weight:700;">📦 중등용 도움자료 — 압축파일 안에 들어있는 파일 목록</div>
+          <div style="font-size:11px; color:#94a3b8;">원자료를 내려받으면 <strong style="color:#7fd9ce;">「중등용 도움자료」</strong> 압축파일 안에서 바로 활용하세요</div>
+        </div>
+        <table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <thead>
+            <tr style="background:#f8fafc; border-bottom:2px solid #e2e8f0;">
+              <th style="padding:9px 14px; text-align:left; font-weight:700; color:#475569; width:38%;">자료명</th>
+              <th style="padding:9px 14px; text-align:left; font-weight:700; color:#475569; width:28%;">연결 전략</th>
+              <th style="padding:9px 14px; text-align:left; font-weight:700; color:#475569;">언제 쓰나요?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #f0f5f4;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">학급 규칙 게시하기 <span style="color:#94a3b8; font-weight:400;">(PPT 3종)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#e8f5f3; color:#1a7a6e; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">예방</span> 학급 규칙 개발·게시</td>
+              <td style="padding:9px 14px; color:#475569;">학기 초, 학생과 함께 학급 규칙을 만들고 교실에 붙일 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4; background:#fafafa;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">시각적 연상자료_활동규칙 <span style="color:#94a3b8; font-weight:400;">(PPT 2종)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#e8f5f3; color:#1a7a6e; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">예방</span> 시각적 연상자료</td>
+              <td style="padding:9px 14px; color:#475569;">수업 중 규칙을 상기시킬 포스터가 필요할 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">분노일지</td>
+              <td style="padding:9px 14px;"><span style="background:#ede9fe; color:#7c3aed; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">교수</span> 분노 조절 훈련</td>
+              <td style="padding:9px 14px; color:#475569;">화를 자주 내는 학생이 스스로 감정을 기록하고 관리할 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4; background:#fafafa;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">수업활동기록지_생활평점제 <span style="color:#94a3b8; font-weight:400;">(PPT)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 학급 강화</td>
+              <td style="padding:9px 14px; color:#475569;">교과별 수업참여도를 기록하고 생활평점제와 연계할 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">학급강화 도장판·학급나무·챌린지 <span style="color:#94a3b8; font-weight:400;">(PPT 3종)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 학급 강화</td>
+              <td style="padding:9px 14px; color:#475569;">학급 보상 시스템(칭찬나무, 도장 적립 등)을 운영할 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4; background:#fafafa;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">일일 진도 카드</td>
+              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 일일 행동 점검(CICO)</td>
+              <td style="padding:9px 14px; color:#475569;">특정 학생의 행동을 매일 체크인·체크아웃으로 점검할 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">행동계약서 <span style="color:#94a3b8; font-weight:400;">(PPT)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 행동계약서</td>
+              <td style="padding:9px 14px; color:#475569;">학생과 행동 목표·보상을 함께 약속하고 서명할 때</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">부록 1~6번 <span style="color:#94a3b8; font-weight:400;">(ABC기록지·QABF 등)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#fef2f2; color:#dc2626; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">관찰</span> 행동 기능 파악</td>
+              <td style="padding:9px 14px; color:#475569;">반복되는 문제행동의 원인을 체계적으로 분석할 때</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ CASES ════════ -->
+<div id="panel-cases" class="panel">
+  <div class="card">
+    <div class="card-head">
+      <h2>📋 사례별 생활지도</h2>
+      <p>A안(유형 카드)과 B안(6버튼) 중 원하는 방식으로 찾아보세요.</p>
+    </div>
+    <div class="card-body">
+
+      <!-- 목록 뷰 -->
+      <div id="case-list-view">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <div class="ab-toggle">
+            <button class="ab-btn on" id="btn-a" onclick="switchAB('a')">A안 · 유형 카드</button>
+            <button class="ab-btn" id="btn-b" onclick="switchAB('b')">B안 · 상황 버튼</button>
+          </div>
+          <div class="ab-notice">👆 두 방식 중 편한 것으로 선택하세요</div>
+        </div>
+
+        <!-- A안 -->
+        <div id="view-a">
+          <div class="ab-label">행동 유형을 선택하면 해당 사례 목록을 봅니다</div>
+          <div class="type-cards">
+            <div class="type-card tc-산만" onclick="filterType('산만')">
+              <div class="tc-icon">🟡</div>
+              <div class="tc-name">산만 행동</div>
+              <div class="tc-desc">타인에게 직접 영향 없이 스스로의 수업 참여를 제한하는 행동<br><br>• 자리 이탈<br>• 스마트기기 사용</div>
+            </div>
+            <div class="type-card tc-방해" onclick="filterType('방해')">
+              <div class="tc-icon">🟢</div>
+              <div class="tc-name">방해 행동</div>
+              <div class="tc-desc">또래 학습을 저해하거나 수업 흐름을 깨뜨리는 행동<br><br>• 엎드려 잠자기<br>• 언쟁·반박</div>
+            </div>
+            <div class="type-card tc-공격" onclick="filterType('공격')">
+              <div class="tc-icon">🔴</div>
+              <div class="tc-name">공격 행동</div>
+              <div class="tc-desc">신체적·정신적 위협이 될 수 있는 말과 행동<br><br>• 조별 몸싸움<br>• 교사에게 욕설</div>
+            </div>
+          </div>
+          <!-- 유형 필터 결과 -->
+          <div id="type-result" style="display:none;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+              <div id="type-result-label" style="font-size:13px;font-weight:700;color:var(--navy);"></div>
+              <button onclick="clearFilter()" style="background:none;border:none;font-size:12px;color:var(--muted);cursor:pointer;text-decoration:underline;">전체 보기</button>
+            </div>
+            <div id="type-result-list" class="six-btns" style="grid-template-columns:1fr;"></div>
+          </div>
+        </div>
+
+        <!-- B안 -->
+        <div id="view-b" style="display:none;">
+          <div class="ab-label">상황을 바로 선택하세요</div>
+          <div class="six-btns">
+            <div class="type-divider td-a"><span>🟡 산만 행동</span><span class="td-line"></span></div>
+            <button class="six-btn" onclick="openCase('c1')"><div class="sb-num sb-num-a">1</div><div><div class="sb-text">수업 중 자리 이탈</div><div class="sb-sub">화장실 핑계로 반복 이탈</div></div></button>
+            <button class="six-btn" onclick="openCase('c2')"><div class="sb-num sb-num-a">2</div><div><div class="sb-text">스마트기기 사용</div><div class="sb-sub">책상 아래서 몰래 조작</div></div></button>
+            <div class="type-divider td-t"><span>🟢 방해 행동</span><span class="td-line"></span></div>
+            <button class="six-btn" onclick="openCase('c3')"><div class="sb-num sb-num-t">3</div><div><div class="sb-text">엎드려 잠자기</div><div class="sb-sub">수업 중 반복적으로 수면</div></div></button>
+            <button class="six-btn" onclick="openCase('c4')"><div class="sb-num sb-num-t">4</div><div><div class="sb-text">언쟁·반박 행동</div><div class="sb-sub">교사 말에 지속적으로 반박</div></div></button>
+            <div class="type-divider td-r"><span>🔴 공격 행동</span><span class="td-line"></span></div>
+            <button class="six-btn" onclick="openCase('c5')"><div class="sb-num sb-num-r">5</div><div><div class="sb-text">조별활동 중 몸싸움</div><div class="sb-sub">언쟁 후 신체 접촉·위협</div></div></button>
+            <button class="six-btn" onclick="openCase('c6')"><div class="sb-num sb-num-r">6</div><div><div class="sb-text">욕설·교사 항의</div><div class="sb-sub">담배 분리 보관 중 욕설</div></div></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 사례 상세 뷰 -->
+      <div id="case-detail-view" style="display:none;">
+
+        <!-- c1 -->
+        <div id="detail-c1" class="case-detail">
+          <div class="case-title-bar">
+            <button class="back-btn" onclick="backToList()">← 목록으로</button>
+            <span class="case-badge cb-a">🟡 산만 행동</span>
+            <h3>수업 중 자리를 이탈하는 행동</h3>
+          </div>
+          <div class="case-tabs">
+            <button class="ctab on" onclick="ctab(this,'c1','원인')">🔍 원인 분석</button>
+            <button class="ctab" onclick="ctab(this,'c1','1차')">💬 교사 언어 예시</button>
+            <button class="ctab" onclick="ctab(this,'c1','2차')">👤 개별 대응</button>
+            <button class="ctab" onclick="ctab(this,'c1','결과')">⚠️ 결과 예고</button>
+            <button class="ctab" onclick="ctab(this,'c1','전략')">🎯 PBS 전략</button>
+          </div>
+          <div id="c1-원인" class="ctab-panel on">
+            <div class="info-block ib-purple">
+              <div class="ib-label">원인 분석</div>
+              <div class="ib-content"><ul>
+                <li><strong>수업 내용의 어려움</strong> — 이해 못해 좌절감·스트레스를 느낄 때</li>
+                <li><strong>흥미도 낮음</strong> — 지루함을 느껴 이탈 시도</li>
+                <li><strong>관심 끌기</strong> — 교사 주목을 받기 위한 의도적 행동</li>
+              </ul></div>
+            </div>
+          </div>
+          <div id="c1-1차" class="ctab-panel">
+            <div class="info-block ib-teal">
+              <div class="ib-label">💬 교사 언어 예시 — 전체 학생 대상</div>
+              <div class="ib-content">수업에서 필요한 행동(자리 앉기·화장실 원칙 등)을 전체에게 설명합니다.</div>
+            </div>
+            <div class="script">"수업 중이니 자기 자리에 앉아서 선생님의 설명을 들으며 책을 봅시다."<br>"선생님의 말씀을 이해하기 어려울 때에는 손을 들고 도움을 청합니다."<br>"화장실은 쉬는 시간이 원칙입니다. <em>특별한 사정이 아니라면 수업 중 1회에 한해 허용합니다.</em>"</div>
+          </div>
+          <div id="c1-2차" class="ctab-panel">
+            <div class="info-block ib-amber">
+              <div class="ib-label">👤 개별 대응</div>
+              <div class="ib-content"><strong>비언어적:</strong> 학생 이름을 부르며 자리를 손가락으로 가리켜 복귀 유도<br><strong>언어적:</strong></div>
+            </div>
+            <div class="script">"○○아, 화장실은 쉬는 시간에 다녀오는 것이 원칙이야. 화장실을 다녀온 지 얼마 안 됐는데 <em>특별한 사정이 있는 것이 아니라면 자리에 앉자.</em>"</div>
+            <div class="tip"><strong>💡 깨알 Tip</strong>눈빛·손짓 등 비언어 신호로 먼저 유도해 수업 방해를 최소화하세요. 행동을 수정하면 즉각 미소·엄지척으로 강화합니다.</div>
+          </div>
+          <div id="c1-결과" class="ctab-panel">
+            <div class="info-block ib-coral">
+              <div class="ib-label">규칙과 결과 예고</div>
+              <div class="ib-content">반복 이탈 시 교실 내 지정 위치로 분리될 수 있음을 예고합니다.</div>
+            </div>
+            <div class="script"><em>2회 이상 주의에도 불구하고 지속 시</em> → 교실 내 다른 좌석(맨 앞, 교사 책상 옆 등 학기 초 약속된 좌석)으로 이동 → 그래도 지속 시 교실 내 다른 장소(사물함 앞, 교실 뒤편 등)</div>
+          </div>
+          <div id="c1-전략" class="ctab-panel">
+            <div class="pbs-strat-grid">
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🙋</span><span class="psc-title">수업 참여 유도</span><span class="psc-cat">예방</span></div>
+                <div class="psc-body">수준·흥미에 맞는 활동과 학습지를 준비합니다. 개별 질문을 통해 학생이 반응할 기회를 늘립니다.</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🖼️</span><span class="psc-title">시각적 연상자료</span><span class="psc-cat">예방</span></div>
+                <div class="psc-body">화장실·교실 이탈 관련 규칙을 그림 포스터로 게시합니다. 문제행동 조짐 시 포스터를 가리켜 조용히 상기시킵니다.</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">💬</span><span class="psc-title">적절한 의사표현 교수</span><span class="psc-cat">교수</span></div>
+                <div class="psc-body">"어렵다"고 손 들어 말하면 즉각 도움을 주겠다고 약속합니다. 이탈 대신 말로 표현하는 연습을 역할극으로 합니다.</div>
+                <div class="psc-example">예: "좀 어려워요" → 선생님이 바로 도와드려요</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🌳</span><span class="psc-title">학급 강화 (학급나무)</span><span class="psc-cat">강화</span></div>
+                <div class="psc-body">이탈 없이 수업에 참여한 학생에게 도장을 적립합니다. 학급 전체가 목표를 달성하면 학급 파티·자유시간 등 보상을 제공합니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- c2 -->
+        <div id="detail-c2" class="case-detail">
+          <div class="case-title-bar">
+            <button class="back-btn" onclick="backToList()">← 목록으로</button>
+            <span class="case-badge cb-a">🟡 산만 행동</span>
+            <h3>수업과 관련 없는 스마트기기를 사용하는 행동</h3>
+          </div>
+          <div class="case-tabs">
+            <button class="ctab on" onclick="ctab(this,'c2','원인')">🔍 원인 분석</button>
+            <button class="ctab" onclick="ctab(this,'c2','1차')">💬 교사 언어 예시</button>
+            <button class="ctab" onclick="ctab(this,'c2','2차')">👤 개별 대응</button>
+            <button class="ctab" onclick="ctab(this,'c2','결과')">⚠️ 결과 예고</button>
+            <button class="ctab" onclick="ctab(this,'c2','전략')">🎯 PBS 전략</button>
+          </div>
+          <div id="c2-원인" class="ctab-panel on">
+            <div class="info-block ib-purple"><div class="ib-label">원인 분석</div><div class="ib-content"><ul>
+              <li><strong>흥미도 낮음</strong> — 동기 부족으로 주의가 다른 곳으로</li>
+              <li><strong>과제 회피</strong> — 지루하거나 이해 어려운 상황 회피</li>
+              <li><strong>스트레스 해소</strong> — 일시적 해소를 위해 몰래 사용</li>
+            </ul></div></div>
+          </div>
+          <div id="c2-1차" class="ctab-panel">
+            <div class="info-block ib-teal"><div class="ib-label">💬 교사 언어 예시 — 전체 학생 대상</div><div class="ib-content">수업 전 전체 학생을 대상으로 스마트기기 규칙을 강조합니다.</div></div>
+            <div class="script">"스마트기기 사용은 허용된 시간에만 가능한 거 알고 있죠? <em>의도하지 않았더라도</em> 갑자기 울리면 집중이 흐트러지니 전원을 껐는지 한 번 더 확인합니다."</div>
+          </div>
+          <div id="c2-2차" class="ctab-panel">
+            <div class="info-block ib-amber"><div class="ib-label">👤 개별 대응</div><div class="ib-content"><strong>비언어적:</strong> 눈맞춤으로 인식시키고, 학급규칙 포스터를 가리킴<br><strong>언어적:</strong></div></div>
+            <div class="script">"○○아, 지금 수업 시간이야. <em>스마트기기 전원을 끄고 수업에 집중하자.</em>"</div>
+            <div class="tip"><strong>💡 깨알 Tip</strong>1회차 주의 → 2회차 분리 보관 예고 → 지속 시 지정 장소(교탁 위 등 학기 초 약속한 장소)에 분리 보관. 수업 종료 후 반드시 반환합니다.</div>
+          </div>
+          <div id="c2-결과" class="ctab-panel">
+            <div class="info-block ib-coral"><div class="ib-label">규칙과 결과 예고</div><div class="ib-content">계속 사용하면 교사가 보관하고 종례 때 반환함을 예고합니다.</div></div>
+            <div class="script">"만약 계속 스마트기기를 사용하면, 학교생활규정에 따라 <em>선생님이 보관하고 있다가 종례할 때 돌려주게 될 거야.</em>"</div>
+          </div>
+          <div id="c2-전략" class="ctab-panel">
+            <div class="pbs-strat-grid">
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">➡️</span><span class="psc-title">프리맥 원리 (먼저-다음에)</span><span class="psc-cat">강화</span></div>
+                <div class="psc-body">수업 활동을 먼저 완료하면 스마트기기를 사용할 수 있음을 카드로 시각적으로 약속합니다.</div>
+                <div class="psc-example">먼저: 활동지 완성 → 다음에: 스마트기기 10분</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🖼️</span><span class="psc-title">시각적 연상자료</span><span class="psc-cat">예방</span></div>
+                <div class="psc-body">스마트기기 사용 규칙 포스터를 학급 게시판에 게시합니다. 조짐이 보일 때 조용히 포스터를 가리켜 상기시킵니다.</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">📵</span><span class="psc-title">물품 분리 (타임아웃)</span><span class="psc-cat">타임아웃</span></div>
+                <div class="psc-body">① 전원 끄고 가방에 넣기 → ② 보관함에 제출 → ③ 교사에게 분리 보관. 수업 종료 후 반드시 반환합니다.</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">😊</span><span class="psc-title">예방적 긍정 상호작용</span><span class="psc-cat">예방</span></div>
+                <div class="psc-body">수업 시작 전 해당 학생에게 먼저 말을 건네고 기대를 표현합니다. 빈번히 사용하는 학생은 수업 전 짧은 휴식을 제공합니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- c3 -->
+        <div id="detail-c3" class="case-detail">
+          <div class="case-title-bar">
+            <button class="back-btn" onclick="backToList()">← 목록으로</button>
+            <span class="case-badge cb-t">🟢 방해 행동</span>
+            <h3>수업 중 엎드려 잠을 자는 행동</h3>
+          </div>
+          <div class="case-tabs">
+            <button class="ctab on" onclick="ctab(this,'c3','원인')">🔍 원인 분석</button>
+            <button class="ctab" onclick="ctab(this,'c3','1차')">💬 교사 언어 예시</button>
+            <button class="ctab" onclick="ctab(this,'c3','2차')">👤 개별 대응</button>
+            <button class="ctab" onclick="ctab(this,'c3','결과')">⚠️ 결과 예고</button>
+            <button class="ctab" onclick="ctab(this,'c3','전략')">🎯 PBS 전략</button>
+          </div>
+          <div id="c3-원인" class="ctab-panel on"><div class="info-block ib-purple"><div class="ib-label">원인 분석</div><div class="ib-content"><ul>
+            <li><strong>수면 부족</strong> — 가정에서 늦게까지 활동</li>
+            <li><strong>학업 스트레스</strong> — 피로 누적·과도한 스트레스</li>
+            <li><strong>흥미도 낮음</strong> — 해당 과목에 흥미 없음</li>
+            <li><strong>정서적 문제</strong> — 가정·개인 문제로 정서 불안정</li>
+          </ul></div></div></div>
+          <div id="c3-1차" class="ctab-panel">
+            <div class="info-block ib-teal"><div class="ib-label">💬 교사 언어 예시 — 전체 학생 대상</div><div class="ib-content">몸이 안 좋으면 미리 알릴 기회를 주고, 졸리면 스트레칭을 허용합니다.</div></div>
+            <div class="script">"오늘 수업도 모두 끝까지 잘 집중해 줄 수 있겠죠? 혹시 몸이 안 좋은 학생은 지금 선생님에게 알려주세요. <em>만약 너무 졸리면 잠깐 일어나서 듣거나 스트레칭을 해도 좋아요.</em>"</div>
+          </div>
+          <div id="c3-2차" class="ctab-panel">
+            <div class="info-block ib-amber"><div class="ib-label">👤 개별 대응 (공감 우선)</div><div class="ib-content"><strong>비언어적:</strong> 책상 모서리·의자 등받이를 살짝 두드려 각성 유도<br><strong>언어적:</strong></div></div>
+            <div class="script">"요즘 무슨 일 있니? 많이 피곤해 보이네. <em>잠을 충분히 자지 못하는 이유가 있어서 도움이 필요하다면 나중에 선생님에게 말해줘.</em> 일단 간단하게 스트레칭을 해보자."</div>
+            <div class="tip"><strong>💡 깨알 Tip</strong>강압적 태도는 반발심을 유발합니다. 공감하는 태도로 다가가 스스로 행동을 수정할 기회를 주고 잠시 기다리세요.</div>
+          </div>
+          <div id="c3-결과" class="ctab-panel">
+            <div class="info-block ib-coral"><div class="ib-label">규칙과 결과 예고</div><div class="ib-content">잠에서 깨려는 노력을 하지 않으면 지정된 자리로 이동해야 함을 예고합니다.</div></div>
+            <div class="script">"잠에서 깨려는 노력을 하지 않는다면, 학생생활규정에 따라 <em>선생님이 지정한 자리(교실 뒤쪽 서서 수업 듣는 키높이 책상)로 옮겨 앉아야 해.</em>"</div>
+          </div>
+          <div id="c3-전략" class="ctab-panel">
+            <div class="pbs-strat-grid">
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🪑</span><span class="psc-title">자리 배치 조정</span><span class="psc-cat">예방</span></div>
+                <div class="psc-body">교사와 눈맞춤이 자주 이루어질 수 있도록 맨 앞줄에 배치합니다. 자리 배치 후 행동 변화를 관찰하며 필요 시 재조정합니다.</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🎯</span><span class="psc-title">선택적 강화 — 상반 행동</span><span class="psc-cat">강화</span></div>
+                <div class="psc-body">엎드리지 않고 바르게 앉아 수업에 참여하는 행동(상반된 행동)을 발견하면 즉시 칭찬합니다.</div>
+                <div class="psc-example">"○○이 오늘 자지 않고 바르게 앉아 집중하고 있네, 정말 잘하고 있어!"</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">📊</span><span class="psc-title">일일 행동 점검 (CICO)</span><span class="psc-cat">강화</span></div>
+                <div class="psc-body">매일 아침 담임교사와 만나 목표를 설정하고, 수업별 교과 교사에게 점수와 서명을 받습니다. 하교 시 체크아웃 후 보호자에게 전달합니다.</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">💬</span><span class="psc-title">적절한 의사표현 교수</span><span class="psc-cat">교수</span></div>
+                <div class="psc-body">피곤하거나 힘들 때 손 들고 "선생님, 몸이 좋지 않아요"라고 말하는 대체 행동을 가르칩니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- c4 -->
+        <div id="detail-c4" class="case-detail">
+          <div class="case-title-bar">
+            <button class="back-btn" onclick="backToList()">← 목록으로</button>
+            <span class="case-badge cb-t">🟢 방해 행동</span>
+            <h3>교사의 이야기를 의심하거나 계속 언쟁하는 행동</h3>
+          </div>
+          <div class="case-tabs">
+            <button class="ctab on" onclick="ctab(this,'c4','원인')">🔍 원인 분석</button>
+            <button class="ctab" onclick="ctab(this,'c4','1차')">💬 교사 언어 예시</button>
+            <button class="ctab" onclick="ctab(this,'c4','2차')">👤 개별 대응</button>
+            <button class="ctab" onclick="ctab(this,'c4','결과')">⚠️ 결과 예고</button>
+            <button class="ctab" onclick="ctab(this,'c4','전략')">🎯 PBS 전략</button>
+          </div>
+          <div id="c4-원인" class="ctab-panel on"><div class="info-block ib-purple"><div class="ib-label">원인 분석</div><div class="ib-content"><ul>
+            <li><strong>관심 끌기</strong> — 친구·선생님의 관심을 끌기 위한 행동</li>
+            <li><strong>동기 부족</strong> — 수업 흥미 없어 문제행동 표출</li>
+            <li><strong>감정 조절의 어려움</strong> — 적절히 조절 못해 공격적 태도</li>
+          </ul></div></div></div>
+          <div id="c4-1차" class="ctab-panel">
+            <div class="info-block ib-teal"><div class="ib-label">💬 교사 언어 예시 — 전체 학생 대상</div><div class="ib-content">질문을 통해 의견을 나누고, 교사 경청 태도의 중요성을 설명합니다.</div></div>
+            <div class="script">"수업 중에 질문이나 의견이 있을 때는 선생님에게 <em>손을 들어 이야기해 주세요.</em> 수업 중에는 모두가 수업 관련 내용에 집중할 수 있도록 합니다."</div>
+          </div>
+          <div id="c4-2차" class="ctab-panel">
+            <div class="info-block ib-amber"><div class="ib-label">👤 개별 대응</div><div class="ib-content"><strong>비언어적:</strong> 조용히 손바닥을 들어 멈추라는 제스처, 침착한 표정 유지<br><strong>언어적:</strong></div></div>
+            <div class="script">"○○아, 선생님은 지금 수업을 진행해야 해. <em>지금은 일단 수업에 집중하고, 궁금한 점이 있다면 쉬는 시간에 개별적으로 질문하자.</em>"</div>
+            <div class="tip"><strong>💡 깨알 Tip</strong>가장 쉬운 지시어(그만/쉿/멈춰)를 통해 학생이 반응하도록 하여 교사의 권위를 확인하세요. 교사는 모든 학생의 수업 목표 달성을 위해 진행할 권리가 있음을 알립니다.</div>
+          </div>
+          <div id="c4-결과" class="ctab-panel">
+            <div class="info-block ib-coral"><div class="ib-label">규칙과 결과 예고</div><div class="ib-content">계속 언쟁·반발 시 분리 조치될 수 있음을 예고합니다.</div></div>
+            <div class="script">"지금 이 상황을 계속 이어간다면 수업에 방해가 되어 <em>학생생활규정에 따라 자리를 옮기거나 분리 조치될 수밖에 없어.</em>"</div>
+          </div>
+          <div id="c4-전략" class="ctab-panel">
+            <div class="pbs-strat-grid">
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🧘</span><span class="psc-title">분노 조절 훈련</span><span class="psc-cat">교수</span></div>
+                <div class="psc-body">화가 날 때 쓸 수 있는 4가지 기법을 가르칩니다.<br>① 박스 호흡 (코로 4초 들이마시고 4초 내쉬기)<br>② 감정 라벨링 ("나는 지금 화가 났어")<br>③ 긍정적 자기대화<br>④ 54321 그라운딩 기법</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">📝</span><span class="psc-title">행동계약서</span><span class="psc-cat">강화</span></div>
+                <div class="psc-body">교사와 학생이 함께 구체적인 행동 목표를 설정하고 서명합니다. 일정 기간 목표를 달성하면 약속한 보상을 제공합니다.</div>
+                <div class="psc-example">목표: 쉬는 시간에 질문하기 / 보상: 급식 먼저 줄서기</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🙈</span><span class="psc-title">계획된 무관심 (타임아웃)</span><span class="psc-cat">타임아웃</span></div>
+                <div class="psc-body">언쟁 행동에는 일정 시간 동안 모든 사회적 강화(관심·반응)를 제거합니다. 바람직한 행동을 보일 때 즉시 관심과 칭찬을 돌려줍니다.</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🖼️</span><span class="psc-title">시각적 규칙 교수</span><span class="psc-cat">예방</span></div>
+                <div class="psc-body">매 수업 시작 전 게시된 규칙을 활용해 빈번히 문제가 되는 행동을 강조합니다. 무관한 말을 하거나 허락 없이 질문할 경우 조용히 포스터를 가리킵니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- c5 -->
+        <div id="detail-c5" class="case-detail">
+          <div class="case-title-bar">
+            <button class="back-btn" onclick="backToList()">← 목록으로</button>
+            <span class="case-badge cb-r">🔴 공격 행동</span>
+            <h3>조별 활동 중 조원과 언쟁하다가 몸싸움하는 행동</h3>
+          </div>
+          <div class="case-tabs">
+            <button class="ctab on" onclick="ctab(this,'c5','원인')">🔍 원인 분석</button>
+            <button class="ctab" onclick="ctab(this,'c5','1차')">💬 교사 언어 예시</button>
+            <button class="ctab" onclick="ctab(this,'c5','2차')">👤 개별 대응</button>
+            <button class="ctab" onclick="ctab(this,'c5','결과')">⚠️ 결과 예고</button>
+            <button class="ctab" onclick="ctab(this,'c5','전략')">🎯 PBS 전략</button>
+          </div>
+          <div id="c5-원인" class="ctab-panel on"><div class="info-block ib-purple"><div class="ib-label">원인 분석</div><div class="ib-content"><ul>
+            <li><strong>의사소통 미숙</strong> — 의견 전달·수용 능력 부족</li>
+            <li><strong>충동 조절 문제</strong> — 갈등 상황에서 즉각 폭력 선택</li>
+            <li><strong>감정적 갈등</strong> — 의견 존중 못받는다고 느낄 때</li>
+          </ul></div></div></div>
+          <div id="c5-1차" class="ctab-panel">
+            <div class="info-block ib-teal"><div class="ib-label">💬 교사 언어 예시 — 조별활동 시작 전</div><div class="ib-content">조별 구성 및 역할 선정 규칙을 미리 명확히 안내합니다.</div></div>
+            <div class="script">"오늘은 조별 활동이 있습니다. 각자 의견을 표현하는 건 좋지만, <em>상대를 비난하거나 공격하는 방법은 존중하지 않는 행동임을</em> 기억하세요."</div>
+          </div>
+          <div id="c5-2차" class="ctab-panel">
+            <div class="info-block ib-amber"><div class="ib-label">👤 즉각 대응 — 몸싸움 발생 시</div><div class="ib-content"><strong>비언어적:</strong> 두 학생 사이로 빠르게 이동, 번갈아 눈맞춤, 손 펴서 진정 제스처<br><strong>언어적:</strong></div></div>
+            <div class="script">"조별 활동에서 중요한 것은 수업 목표와 관련된 활동을 완성하는 거야. <em>숨을 고르며 감정을 가라앉히자.</em>"</div>
+            <div class="tip"><strong>💡 깨알 Tip</strong>짧고 명확한 문장과 차분한 어조로 대응하세요. 협박하는 말투나 지나치게 공격적인 어투는 지양합니다.</div>
+          </div>
+          <div id="c5-결과" class="ctab-panel">
+            <div class="info-block ib-coral"><div class="ib-label">규칙과 결과 예고</div><div class="ib-content">중재 수용 안 하면 교실 밖 분리·성찰 시간을 예고합니다.</div></div>
+            <div class="script">"선생님이 앞서 이야기를 했는데도 진정되지 않는다면 <em>학생생활규정에 따라 교실 밖으로 분리되어 네 행동에 관해 성찰하는 시간을 가져야 해.</em>"</div>
+          </div>
+          <div id="c5-전략" class="ctab-panel">
+            <div class="pbs-strat-grid">
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">📜</span><span class="psc-title">학급 규칙 개발·게시</span><span class="psc-cat">예방</span></div>
+                <div class="psc-body">조별활동 시작 전 규칙을 다시 상기시킵니다. '신체 접촉을 피하도록 거리두기', '조원의 역할은 가위바위보로 결정하기' 등을 포함합니다.</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🤝</span><span class="psc-title">또래 갈등 대처 전략</span><span class="psc-cat">교수</span></div>
+                <div class="psc-body">카드 형태로 만들어 갈등 상황에 직면했을 때 하나씩 체크하며 실행하도록 합니다.<br>① 일단 침착하게 행동하기<br>② 다른 사람 얘기 들어보기<br>③ '나' 메시지로 감정 표현하기<br>④ 서로 윈-윈 방법 찾기</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">💬</span><span class="psc-title">적절한 의사표현 교수</span><span class="psc-cat">교수</span></div>
+                <div class="psc-body">화를 내는 것보다 '나' 전달법이 더 효과적임을 알려줍니다. 역할극으로 연습합니다.</div>
+                <div class="psc-example">"나는 내 의견이 무시당해서 속상해" (○) / "너 때문이야!" (✗)</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🌳</span><span class="psc-title">학급 강화 연계</span><span class="psc-cat">강화</span></div>
+                <div class="psc-body">조별활동 중 갈등 없이 역할을 완수하면 학급나무에 도장을 적립합니다. 앱(e알리미 등)의 상벌점 리스트와 연계할 수 있습니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- c6 -->
+        <div id="detail-c6" class="case-detail">
+          <div class="case-title-bar">
+            <button class="back-btn" onclick="backToList()">← 목록으로</button>
+            <span class="case-badge cb-r">🔴 공격 행동</span>
+            <h3>담배 분리 보관하려는 교사에게 욕설하는 행동</h3>
+          </div>
+          <div class="case-tabs">
+            <button class="ctab on" onclick="ctab(this,'c6','원인')">🔍 원인 분석</button>
+            <button class="ctab" onclick="ctab(this,'c6','1차')">💬 교사 언어 예시</button>
+            <button class="ctab" onclick="ctab(this,'c6','2차')">👤 개별 대응</button>
+            <button class="ctab" onclick="ctab(this,'c6','결과')">⚠️ 결과 예고</button>
+            <button class="ctab" onclick="ctab(this,'c6','전략')">🎯 PBS 전략</button>
+          </div>
+          <div id="c6-원인" class="ctab-panel on"><div class="info-block ib-purple"><div class="ib-label">원인 분석</div><div class="ib-content"><ul>
+            <li><strong>권위에 대한 반발</strong> — 지시가 불합리하게 느껴질 때</li>
+            <li><strong>스트레스와 좌절</strong> — 정서적으로 불안정한 상태</li>
+            <li><strong>의사소통 미숙</strong> — 공격적 대응 방식 선택</li>
+          </ul></div></div></div>
+          <div id="c6-1차" class="ctab-panel">
+            <div class="info-block ib-teal"><div class="ib-label">💬 교사 언어 예시 — 전체 학생 대상</div><div class="ib-content">소지 불가 물품의 종류와 이유를 명확히 설명합니다.</div></div>
+            <div class="script">"학교에서는 여러분의 안전을 위해 담배(라이터)를 갖고 있지 않도록 규정하고 있습니다. <em>이 규칙은 모두가 안전한 학교생활을 하기 위한 것이니 꼭 지켜야 합니다.</em>"</div>
+            <div class="tip"><strong>📌 참고 — 소지 금지 물품</strong>담배·술·성냥·라이터·도박 물품 등은 주의 절차 없이 확인 즉시 분리 보관합니다. 교무실 등 지정 장소 보관 후 학교장 보고 → 보호자 안내.</div>
+          </div>
+          <div id="c6-2차" class="ctab-panel">
+            <div class="info-block ib-amber"><div class="ib-label">👤 즉각 대응</div><div class="ib-content"><strong>비언어적:</strong> 이름 부르며 눈맞춤, 손 내리며 차분하게 진정 제스처<br><strong>언어적:</strong></div></div>
+            <div class="script">"○○아, 담배는 학교생활규정상 너와 다른 친구들의 안전을 위해 가지고 다닐 수 없어. <em>지금은 다른 친구들과 함께 교육활동 중이므로, 감정을 가라앉히도록 해.</em>"</div>
+          </div>
+          <div id="c6-결과" class="ctab-panel">
+            <div class="info-block ib-coral"><div class="ib-label">규칙과 결과 예고</div><div class="ib-content">욕설 지속 시 교실 밖 분리와 보호자 안내를 예고합니다.</div></div>
+            <div class="script">"학생생활규정에 따라 담배는 교무실에 보관하고 보호자에게 알려야 해. <em>선생님께 욕을 하는 경우, 학생생활규정에 따라 교실 밖으로 분리될 수밖에 없어.</em>"</div>
+          </div>
+          <div id="c6-전략" class="ctab-panel">
+            <div class="pbs-strat-grid">
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">📜</span><span class="psc-title">학급 규칙 개발·게시</span><span class="psc-cat">예방</span></div>
+                <div class="psc-body">학급자치 시간에 학생들과 함께 소지 금지 물품 관련 규칙을 선정하고 포스터로 게시합니다. 규칙을 지켰을 때와 위반했을 때의 결과를 예측 가능하도록 안내합니다.</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">🧘</span><span class="psc-title">분노 조절 훈련</span><span class="psc-cat">교수</span></div>
+                <div class="psc-body">화가 났을 때 사용할 수 있는 기법을 평소에 미리 가르칩니다.<br>① 박스 호흡으로 흥분 완화<br>② 감정 라벨링으로 감정 인식<br>③ '나' 메시지로 표현하기</div>
+                <div class="psc-example">"저는 많은 친구들 앞에서 혼나는 것이 창피해서 화가 나요."</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">✏️</span><span class="psc-title">오류 교정 절차</span><span class="psc-cat">교수</span></div>
+                <div class="psc-body">학생이 진정된 후 6단계로 교정합니다.<br>① 행동을 명확히 언급<br>② 왜 부적절한지 설명<br>③ 올바른 행동 시범<br>④ 따라 하기 기회 제공<br>⑤ 잘했을 때 강화<br>⑥ 반복 연습 지원</div>
+              </div>
+              <div class="pbs-strat-card">
+                <div class="psc-head"><span class="psc-icon">📝</span><span class="psc-title">행동계약서</span><span class="psc-cat">강화</span></div>
+                <div class="psc-body">교사·학생·보호자가 함께 행동 목표를 서명합니다. 보호자 서명을 통해 가정과의 협력을 강화하고, 목표 달성 시 보상을 제공합니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /case-detail-view -->
+    </div>
+  </div>
+</div>
+
+<!-- ════════ STRATEGIES ════════ -->
+<div id="panel-strat" class="panel">
+  <div class="card">
+    <div class="card-head"><h2>🎯 PBS 전략 모음</h2><p>예방·교수·강화·타임아웃 — 필요한 전략군을 선택하세요.</p></div>
+    <div class="card-body">
+      <div class="strat-tabs">
+        <button class="stabtn on" onclick="stab(this,'sp')">🛡️ 예방</button>
+        <button class="stabtn" onclick="stab(this,'st')">📖 교수</button>
+        <button class="stabtn" onclick="stab(this,'sr')">⭐ 강화</button>
+        <button class="stabtn" onclick="stab(this,'so')">⏸️ 타임아웃</button>
+      </div>
+      <div id="sp" class="strat-panel on">
+        <div class="strat-grid">
+          <div class="strat-card"><div class="sc-icon">🪑</div><div class="sc-title">자리 배치</div><div class="sc-desc">잠자거나 산만한 학생 → 앞줄. 수다 학생 → 적극적 친구 옆 또는 멀리.</div></div>
+          <div class="strat-card"><div class="sc-icon">📅</div><div class="sc-title">일과의 구조화</div><div class="sc-desc">시간표·활동계획표 게시로 예측 가능한 환경 제공. 학생 안정감 향상.</div></div>
+          <div class="strat-card"><div class="sc-icon">😊</div><div class="sc-title">긍정적 분위기 형성</div><div class="sc-desc">미소·눈맞춤·다가가기를 일정 간격으로 실천. 관심 기능 학생에 특히 효과적.</div></div>
+          <div class="strat-card"><div class="sc-icon">📜</div><div class="sc-title">학급 규칙 개발·게시</div><div class="sc-desc">학생과 함께 규칙 만들기. 장소·상황별 기대행동 매트릭스. 3개 이내 긍정 표현으로.</div></div>
+          <div class="strat-card"><div class="sc-icon">🖼️</div><div class="sc-title">시각적 연상자료</div><div class="sc-desc">규칙 그림·아이콘 포스터를 눈에 잘 띄는 곳에 게시. 문제행동 조짐 시 손으로 가리켜 상기.</div></div>
+          <div class="strat-card"><div class="sc-icon">🙋</div><div class="sc-title">수업 참여 유도</div><div class="sc-desc">수준·흥미에 맞는 활동 준비, 발언 기회 확대, 1인 1역할 부여.</div></div>
+        </div>
+      </div>
+      <div id="st" class="strat-panel" style="display:none;">
+        <div class="strat-grid">
+          <div class="strat-card"><div class="sc-icon">💬</div><div class="sc-title">적절한 의사표현 교수</div><div class="sc-desc">손들기·카드·말하기 등 바람직한 표현 방법을 역할극으로 연습.</div></div>
+          <div class="strat-card"><div class="sc-icon">✏️</div><div class="sc-title">오류 교정 절차</div><div class="sc-desc">행동 언급 → 부적절 이유 설명 → 올바른 행동 시범 → 따라하기 → 강화의 6단계.</div></div>
+          <div class="strat-card"><div class="sc-icon">🧘</div><div class="sc-title">분노 조절 훈련</div><div class="sc-desc">박스 호흡, 감정 라벨링, 긍정 자기대화, 54321 그라운딩 기법 순서로 가르치기.</div></div>
+          <div class="strat-card"><div class="sc-icon">🎭</div><div class="sc-title">주제융합 프로젝트</div><div class="sc-desc">국어-도덕 연계 등 교과 간 연계로 갈등 해결 이야기 글 쓰기·감정 표현 훈련 통합.</div></div>
+        </div>
+      </div>
+      <div id="sr" class="strat-panel" style="display:none;">
+        <div class="strat-grid">
+          <div class="strat-card"><div class="sc-icon">🌟</div><div class="sc-title">긍정적 강화와 칭찬</div><div class="sc-desc">즉각성·일관성 원칙. 간식·칭찬·자유시간·스티커 등 다양한 강화물 활용.</div></div>
+          <div class="strat-card"><div class="sc-icon">🌳</div><div class="sc-title">학급 강화 (학급나무)</div><div class="sc-desc">규칙 지켰을 때 도장 적립 → 일정 점수 달성 시 학급파티·자유시간 등 제공.</div></div>
+          <div class="strat-card"><div class="sc-icon">🎯</div><div class="sc-title">선택적 강화</div><div class="sc-desc">낮은빈도 강화 / 다른행동 강화 / 상반된행동 강화 / 대체행동 강화 4가지 방법.</div></div>
+          <div class="strat-card"><div class="sc-icon">➡️</div><div class="sc-title">프리맥 원리</div><div class="sc-desc">싫어하는 활동 먼저 완료 → 좋아하는 활동(스마트기기 등) 카드로 약속.</div></div>
+          <div class="strat-card"><div class="sc-icon">📊</div><div class="sc-title">일일 행동 점검 (CICO)</div><div class="sc-desc">체크인 → 수업별 점수 기록 → 체크아웃 → 가정 소통의 순환으로 긍정 피드백 확대.</div></div>
+          <div class="strat-card"><div class="sc-icon">📝</div><div class="sc-title">행동계약서</div><div class="sc-desc">구체적 목표·보상을 교사·학생이 함께 문서화·서명. 일정 기간 달성 시 보상 제공.</div></div>
+        </div>
+      </div>
+      <div id="so" class="strat-panel" style="display:none;">
+        <div class="strat-grid">
+          <div class="strat-card"><div class="sc-icon">📵</div><div class="sc-title">물품 분리</div><div class="sc-desc">2회 주의 후 지속 시 ① 가방에 넣기 → ② 보관함 제출 → ③ 교사 분리 보관.</div></div>
+          <div class="strat-card"><div class="sc-icon">🙈</div><div class="sc-title">계획된 무관심</div><div class="sc-desc">문제행동 발생 시 일정 시간 모든 사회적 강화제 제거. 관심 추구 행동에 효과적.</div></div>
+          <div class="strat-card"><div class="sc-icon">🎀</div><div class="sc-title">타임아웃 리본</div><div class="sc-desc">수업 시작 전 손목에 리본 부착. 문제행동 시 리본 회수 → 리본 없는 동안 강화 없음.</div></div>
+          <div class="strat-card"><div class="sc-icon">🚪</div><div class="sc-title">교실 밖 격리 타임아웃</div><div class="sc-desc">교실 내 타임아웃 먼저. 신체 공격·기물 파손 등 위협 행동에 선택적으로 적용.</div></div>
+        </div>
+        <div class="info-block ib-amber" style="margin-top:14px;"><div class="ib-label">⚠️ 타임아웃 운영 원칙</div><div class="ib-content">연령·심각성 고려해 <strong>2~10분</strong>으로 설정. 타이머 사용. 학생이 싫어하는 상황을 회피하기 위해 방해행동을 보였다면, 활동 배제 자체가 목적을 달성시켜 문제행동을 강화할 수 있으니 주의하세요.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ CRISIS ════════ -->
+<div id="panel-crisis" class="panel">
+  <div class="card">
+    <div class="card-head"><h2>🚨 위기행동 대응</h2><p>담임 지도에도 불구하고 심화된 경우 — 학교 차원의 체계적 절차입니다.</p></div>
+    <div class="card-body">
+      <div class="info-block ib-coral" style="margin-bottom:18px;">
+        <div class="ib-label">위기관리학생이란?</div>
+        <div class="ib-content">담임교사의 생활지도에도 불구하고 <strong>문제행동이 심화되어 학교 차원의 관리·지원이 필요한 학생</strong>을 말합니다.</div>
+      </div>
+
+      <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px;">📐 교내 3단계 위기학생 관리망</div>
+      <div class="flow">
+        <div class="flow-row">
+          <div class="flow-line-col"><div class="f-dot"></div><div class="f-line"></div></div>
+          <div class="flow-content"><strong>1단계 · 학급차원 관리</strong><p>학급 내 소소한 문제행동 → 담임교사 지도조언으로 관리</p><div class="badge-row"><span class="fbadge fb-g">담임 단독 대응</span></div></div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-line-col"><div class="f-dot" style="background:var(--amber)"></div><div class="f-line"></div></div>
+          <div class="flow-content"><strong>2단계 · 학교차원 관리 → 위기관리학생</strong><p>담임 관리가 어려운 경우 → 학교관리자 차원 집중관리</p><div class="badge-row"><span class="fbadge fb-b">위기행동관리팀</span><span class="fbadge fb-b">BIP 수립</span><span class="fbadge fb-g">보호자 안내</span></div></div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-line-col"><div class="f-dot" style="background:var(--coral)"></div></div>
+          <div class="flow-content"><strong>3단계 · 외부기관 연계 → 집중위기관리학생</strong><p>심리·정서 어려움 → Wee센터, 경찰서, 정신건강의학 등 연계</p><div class="badge-row"><span class="fbadge fb-r">Wee센터</span><span class="fbadge fb-r">외부 전문가</span></div></div>
+        </div>
+      </div>
+
+      <div style="font-size:13px;font-weight:700;color:var(--navy);margin:20px 0 12px;">⚡ 수업 중 분리 조치 단계</div>
+      <div class="flow">
+        <div class="flow-row"><div class="flow-line-col"><div class="f-dot" style="background:#7c3aed"></div><div class="f-line"></div></div><div class="flow-content"><strong>[1호] 교실 내 다른 좌석으로 이동</strong><p>맨 앞·교사 책상 옆 등 학기 초 학생들과 미리 약속된 좌석</p></div></div>
+        <div class="flow-row"><div class="flow-line-col"><div class="f-dot" style="background:var(--amber)"></div><div class="f-line"></div></div><div class="flow-content"><strong>[2호] 교실 내 지정 위치로 분리</strong><p>사물함 앞·교실 뒤편 등. 참여 의사를 보일 때 복귀 지시</p></div></div>
+        <div class="flow-row"><div class="flow-line-col"><div class="f-dot" style="background:var(--coral)"></div></div><div class="flow-content"><strong>[3호·4호] 교실 밖 지정 장소로 분리</strong><p>학교장 보고 → 보호자 안내 필수. 행동 성찰문·학습과제 부여 가능.</p><div class="badge-row"><span class="fbadge fb-r">학교장 보고</span><span class="fbadge fb-r">보호자 안내</span></div></div></div>
+      </div>
+
+      <div class="info-block ib-amber" style="margin-top:16px;">
+        <div class="ib-label">🏠 가정학습 실시 요건</div>
+        <div class="ib-content">분리 거부 또는 1일 2회 이상 분리에도 교육활동 방해가 지속될 경우 → 보호자에게 학생 인계 요청 → 가정학습 실시 → 가정학습 확인서 제출</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// ── 패널 전환
+var menuIds = ['home','cases','strat','crisis'];
+function go(id) {
+  menuIds.forEach(function(m) {
+    document.getElementById('panel-'+m).classList.remove('on');
+    var btn = document.getElementById('mn-'+m);
+    if (btn) btn.classList.remove('active');
+  });
+  document.getElementById('panel-'+id).classList.add('on');
+  var active = document.getElementById('mn-'+id);
+  if (active) active.classList.add('active');
+  // cases 패널로 이동 시 목록 뷰 보이기
+  if (id === 'cases') backToList();
+}
+
+// ── A/B 전환
+function switchAB(v) {
+  document.getElementById('btn-a').classList.toggle('on', v==='a');
+  document.getElementById('btn-b').classList.toggle('on', v==='b');
+  document.getElementById('view-a').style.display = v==='a' ? 'block' : 'none';
+  document.getElementById('view-b').style.display = v==='b' ? 'block' : 'none';
+  clearFilter();
+}
+
+// ── 유형 필터 (A안)
+var typeMap = {
+  '산만': [
+    {id:'c1', text:'수업 중 자리 이탈', sub:'화장실 핑계로 반복 이탈', cls:'a'},
+    {id:'c2', text:'스마트기기 사용', sub:'책상 아래서 몰래 조작', cls:'a'}
+  ],
+  '방해': [
+    {id:'c3', text:'엎드려 잠자기', sub:'수업 중 반복적으로 수면', cls:'t'},
+    {id:'c4', text:'언쟁·반박 행동', sub:'교사 말에 지속적으로 반박', cls:'t'}
+  ],
+  '공격': [
+    {id:'c5', text:'조별활동 중 몸싸움', sub:'언쟁 후 신체 접촉·위협', cls:'r'},
+    {id:'c6', text:'욕설·교사 항의', sub:'담배 분리 중 욕설', cls:'r'}
+  ]
+};
+function filterType(type) {
+  var result = document.getElementById('type-result');
+  var label = document.getElementById('type-result-label');
+  var list = document.getElementById('type-result-list');
+  var icon = {산만:'🟡',방해:'🟢',공격:'🔴'};
+  label.textContent = icon[type] + ' ' + type + ' 행동 사례';
+  list.innerHTML = '';
+  typeMap[type].forEach(function(c) {
+    var btn = document.createElement('button');
+    btn.className = 'six-btn';
+    btn.innerHTML = '<div class="sb-num sb-num-'+c.cls+'">▶</div><div><div class="sb-text">'+c.text+'</div><div class="sb-sub">'+c.sub+'</div></div>';
+    btn.onclick = function() { openCase(c.id); };
+    list.appendChild(btn);
+  });
+  result.style.display = 'block';
+}
+function clearFilter() {
+  document.getElementById('type-result').style.display = 'none';
+}
+
+// ── 사례 열기 (tabKey 생략 시 원인 분석, 'script' 전달 시 교사 언어 예시 탭)
+function openCase(id, tabKey) {
+  go('cases');
+  document.getElementById('case-list-view').style.display = 'none';
+  document.getElementById('case-detail-view').style.display = 'block';
+  document.querySelectorAll('.case-detail').forEach(function(d) { d.classList.remove('on'); });
+  var det = document.getElementById('detail-'+id);
+  if (det) det.classList.add('on');
+  var tabs = det.querySelectorAll('.ctab');
+  var panels = det.querySelectorAll('.ctab-panel');
+  tabs.forEach(function(t) { t.classList.remove('on'); });
+  panels.forEach(function(p) { p.classList.remove('on'); });
+  if (tabKey === 'script') {
+    // "교사 언어 예시" 탭 = 두 번째 탭(index 1)
+    if (tabs[1]) tabs[1].classList.add('on');
+    if (panels[1]) panels[1].classList.add('on');
+  } else {
+    if (tabs[0]) tabs[0].classList.add('on');
+    if (panels[0]) panels[0].classList.add('on');
+  }
+}
+function backToList() {
+  document.getElementById('case-list-view').style.display = 'block';
+  document.getElementById('case-detail-view').style.display = 'none';
+}
+
+// ── 사례 탭
+function ctab(btn, caseId, tabId) {
+  var det = document.getElementById('detail-'+caseId);
+  det.querySelectorAll('.ctab').forEach(function(t) { t.classList.remove('on'); });
+  det.querySelectorAll('.ctab-panel').forEach(function(p) { p.classList.remove('on'); });
+  btn.classList.add('on');
+  var panel = document.getElementById(caseId+'-'+tabId);
+  if (panel) panel.classList.add('on');
+}
+
+// ── 전략 탭
+var stratIds = ['sp','st','sr','so'];
+function stab(btn, id) {
+  stratIds.forEach(function(s) {
+    var el = document.getElementById(s);
+    if (el) el.style.display = 'none';
+  });
+  document.querySelectorAll('.stabtn').forEach(function(b) { b.classList.remove('on'); });
+  var target = document.getElementById(id);
+  if (target) target.style.display = 'block';
+  btn.classList.add('on');
+}
+// 전략 패널 초기 상태
+stratIds.slice(1).forEach(function(s) {
+  var el = document.getElementById(s);
+  if (el) el.style.display = 'none';
+});
+
+// ── psc-cat 색상 자동 적용
+function applyPscCatColors() {
+  document.querySelectorAll('.psc-cat').forEach(function(el) {
+    var t = el.textContent.trim();
+    el.classList.remove('psc-cat-예방','psc-cat-교수','psc-cat-강화','psc-cat-타임아웃');
+    if (t === '예방') el.classList.add('psc-cat-예방');
+    else if (t === '교수') el.classList.add('psc-cat-교수');
+    else if (t === '강화') el.classList.add('psc-cat-강화');
+    else if (t === '타임아웃') el.classList.add('psc-cat-타임아웃');
+  });
+}
+window.addEventListener('DOMContentLoaded', applyPscCatColors);
+</script>
+</body>
+</html>
