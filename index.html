@@ -240,13 +240,14 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--smoke); color:
     <div class="sb-head">📚 메뉴</div>
     <ul class="sb-list">
       <li><button onclick="go('home')" id="mn-home" class="active">🏠 가이드 소개</button></li>
-      <li><button onclick="go('cases')" id="mn-cases">📋 사례별 지도 <span class="sb-tag tag-t">6건</span></button></li>
-      <li><button onclick="go('strat')" id="mn-strat">🎯 PBS 전략 모음</button></li>
-      <li><button onclick="go('crisis')" id="mn-crisis">🚨 위기행동 대응 <span class="sb-tag tag-r">중요</span></button></li>
+      <li><button onclick="go('cases')" id="mn-cases">1. 사례별 지도</button></li>
+      <li><button onclick="go('strat')" id="mn-strat">2. PBS 전략 모음</button></li>
+      <li><button onclick="go('crisis')" id="mn-crisis">3. 위기행동 대응</button></li>
+      <li><button onclick="go('ref')" id="mn-ref">📎 출처 및 도움 자료</button></li>
     </ul>
   </div>
   <div class="sb-box">
-    <div class="sb-head">⚡ 빠른 찾기 — 교사 언어 예시 바로가기</div>
+    <div class="sb-head">⚡ 빠른 찾기 — <span style="color:#fcd34d; font-weight:900; letter-spacing:.2px;">교사 언어 예시 바로가기</span></div>
     <ul class="sb-list">
       <li><button onclick="openCase('c1','script')">수업 중 자리 이탈</button></li>
       <li><button onclick="openCase('c2','script')">스마트기기 사용</button></li>
@@ -263,9 +264,42 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--smoke); color:
 
 <!-- ════════ HOME ════════ -->
 <div id="panel-home" class="panel on">
-  <div class="card">
-    <div class="card-head">
-      <h2>긍정적 행동지원(PBS)의 핵심 4단계</h2>
+
+  <!-- 활용 가이드 카드 -->
+  <div class="card" style="margin-bottom:18px;">
+    <div class="card-head" style="background:var(--teal); border-bottom-color:var(--teal);">
+      <h2 style="color:white;">사이트 활용 가이드</h2>
+      <p style="color:rgba(255,255,255,.75);">상황에 따라 이 가이드를 이렇게 활용하세요.</p>
+    </div>
+    <div class="card-body">
+      <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+        <li style="display:flex; align-items:flex-start; gap:12px; background:var(--teal-pale); border:1px solid var(--teal-mid); border-radius:9px; padding:12px 14px;">
+          <span style="font-size:18px; flex-shrink:0; line-height:1.4;">⚡</span>
+          <div style="font-size:13px;"><strong>지금 당장 필요하다면</strong> → 왼쪽 <strong>'빠른 찾기'</strong>에서 문제 상황 클릭</div>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; background:var(--teal-pale); border:1px solid var(--teal-mid); border-radius:9px; padding:12px 14px;">
+          <span style="font-size:18px; flex-shrink:0; line-height:1.4;">🌱</span>
+          <div style="font-size:13px;"><strong>학기 초 준비하려면</strong> → <strong>[2. PBS 전략 모음]</strong> 탭에서 예방 전략 확인</div>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; background:var(--teal-pale); border:1px solid var(--teal-mid); border-radius:9px; padding:12px 14px;">
+          <span style="font-size:18px; flex-shrink:0; line-height:1.4;">🔍</span>
+          <div style="font-size:13px;"><strong>반복되는 학생이 있다면</strong> → ABC 관찰기록지로 행동 기능 파악 <span style="color:var(--teal); font-size:12px; font-weight:600;">(출처 및 도움 자료 참고)</span></div>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; background:var(--teal-pale); border:1px solid var(--teal-mid); border-radius:9px; padding:12px 14px;">
+          <span style="font-size:18px; flex-shrink:0; line-height:1.4;">🚨</span>
+          <div style="font-size:13px;"><strong>심각하게 악화됐다면</strong> → <strong>[3. 위기행동 대응]</strong> 탭의 3단계 절차 확인</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PBS 4단계 카드 -->
+  <div class="card" style="border-color:var(--coral-mid);">
+    <div class="card-head" style="background:var(--coral-light); border-bottom-color:var(--coral-mid);">
+      <h2 style="color:var(--navy); display:flex; align-items:center; gap:10px;">
+        <span style="font-size:10px; font-weight:700; background:var(--coral); color:white; padding:3px 8px; border-radius:4px; letter-spacing:.4px; flex-shrink:0;">필독</span>
+        긍정적 행동지원(PBS)의 핵심 4단계
+      </h2>
       <p>모든 생활지도의 출발점 — 먼저 이 4단계를 이해하고 시작하세요.</p>
     </div>
     <div class="card-body">
@@ -275,109 +309,9 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--smoke); color:
         <div class="pbs-step"><div class="ps-icon">🤔</div><div class="ps-q">어떻게 도와줄까?</div><div class="ps-desc">행동을 예방하는 방법 고민</div></div>
         <div class="pbs-step"><div class="ps-icon">✅</div><div class="ps-q">이렇게 행동해보자</div><div class="ps-desc">더 나은 행동을 지도하기</div></div>
       </div>
-
-      <div style="background:var(--smoke);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:12px;">
-        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">📖 이 가이드 구성</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
-          <div style="background:var(--teal-pale);border:1px solid var(--teal-mid);border-radius:8px;padding:10px 12px;font-size:12px;display:flex;align-items:center;gap:8px;">
-            <span style="font-size:18px;flex-shrink:0;">📋</span>
-            <div><div style="font-weight:700;color:var(--teal);">제1장 · 사례별 지도</div><div style="color:var(--muted);font-size:11px;">6가지 상황별 즉각 대응</div></div>
-          </div>
-          <div style="background:var(--amber-light);border:1px solid var(--amber-mid);border-radius:8px;padding:10px 12px;font-size:12px;display:flex;align-items:center;gap:8px;">
-            <span style="font-size:18px;flex-shrink:0;">🎯</span>
-            <div><div style="font-weight:700;color:var(--amber);">제2장 · PBS 전략 모음</div><div style="color:var(--muted);font-size:11px;">예방·교수·강화·타임아웃</div></div>
-          </div>
-          <div style="background:var(--coral-light);border:1px solid var(--coral-mid);border-radius:8px;padding:10px 12px;font-size:12px;display:flex;align-items:center;gap:8px;">
-            <span style="font-size:18px;flex-shrink:0;">🚨</span>
-            <div><div style="font-weight:700;color:var(--coral);">제3장 · 위기행동 대응</div><div style="color:var(--muted);font-size:11px;">심화 시 3단계 절차</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="info-block ib-teal">
-        <div class="ib-label">활용 방법</div>
-        <div class="ib-content">
-          <ul>
-            <li><strong>지금 당장 필요하다면</strong> → 왼쪽 <strong>'빠른 찾기'</strong>에서 상황 클릭</li>
-            <li><strong>학기 초 준비하려면</strong> → <strong>[PBS 전략]</strong> 탭에서 예방 전략 확인</li>
-            <li><strong>반복되는 학생이 있다면</strong> → ABC 관찰기록지로 행동 기능 파악</li>
-            <li><strong>심각하게 악화됐다면</strong> → <strong>[위기행동 대응]</strong> 탭의 3단계 절차 확인</li>
-          </ul>
-        </div>
-      </div>
-
-      <div style="margin-top:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:13px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-        <div>
-          <div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:.4px; margin-bottom:3px;">📄 원출처</div>
-          <div style="font-size:12px; color:#1e293b;">서울특별시교육청 민주시민생활교육과 (2024.12)<br>
-          <span style="color:#64748b; font-size:11px;">교실 속 문제행동 빠르게 예방하고, 바르게 가르치기! (중등)</span></div>
-        </div>
-        <a href="https://buseo.sen.go.kr/buseo/bu15/user/bbs/BD_selectBbs.do?q_bbsSn=1331&q_bbsDocNo=20241216174527964" target="_blank"
-           style="display:inline-flex; align-items:center; gap:6px; background:#1a7a6e; color:white; text-decoration:none; font-size:12px; font-weight:700; padding:8px 16px; border-radius:8px; white-space:nowrap; flex-shrink:0; transition:background .15s;"
-           onmouseover="this.style.background='#2ea893'" onmouseout="this.style.background='#1a7a6e'">
-          📥 원자료 내려받기
-        </a>
-      </div>
-
-      <div style="margin-top:14px; background:white; border:1px solid #e2e8f0; border-radius:10px; overflow:hidden;">
-        <div style="background:#1e293b; color:white; padding:11px 16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;">
-          <div style="font-size:13px; font-weight:700;">📦 중등용 도움자료 — 압축파일 안에 들어있는 파일 목록</div>
-          <div style="font-size:11px; color:#94a3b8;">원자료를 내려받으면 <strong style="color:#7fd9ce;">「중등용 도움자료」</strong> 압축파일 안에서 바로 활용하세요</div>
-        </div>
-        <table style="width:100%; border-collapse:collapse; font-size:12px;">
-          <thead>
-            <tr style="background:#f8fafc; border-bottom:2px solid #e2e8f0;">
-              <th style="padding:9px 14px; text-align:left; font-weight:700; color:#475569; width:38%;">자료명</th>
-              <th style="padding:9px 14px; text-align:left; font-weight:700; color:#475569; width:28%;">연결 전략</th>
-              <th style="padding:9px 14px; text-align:left; font-weight:700; color:#475569;">언제 쓰나요?</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid #f0f5f4;">
-              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">학급 규칙 게시하기 <span style="color:#94a3b8; font-weight:400;">(PPT 3종)</span></td>
-              <td style="padding:9px 14px;"><span style="background:#e8f5f3; color:#1a7a6e; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">예방</span> 학급 규칙 개발·게시</td>
-              <td style="padding:9px 14px; color:#475569;">학기 초, 학생과 함께 학급 규칙을 만들고 교실에 붙일 때</td>
-            </tr>
-            <tr style="border-bottom:1px solid #f0f5f4; background:#fafafa;">
-              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">시각적 연상자료_활동규칙 <span style="color:#94a3b8; font-weight:400;">(PPT 2종)</span></td>
-              <td style="padding:9px 14px;"><span style="background:#e8f5f3; color:#1a7a6e; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">예방</span> 시각적 연상자료</td>
-              <td style="padding:9px 14px; color:#475569;">수업 중 규칙을 상기시킬 포스터가 필요할 때</td>
-            </tr>
-            <tr style="border-bottom:1px solid #f0f5f4;">
-              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">분노일지</td>
-              <td style="padding:9px 14px;"><span style="background:#ede9fe; color:#7c3aed; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">교수</span> 분노 조절 훈련</td>
-              <td style="padding:9px 14px; color:#475569;">화를 자주 내는 학생이 스스로 감정을 기록하고 관리할 때</td>
-            </tr>
-            <tr style="border-bottom:1px solid #f0f5f4; background:#fafafa;">
-              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">수업활동기록지_생활평점제 <span style="color:#94a3b8; font-weight:400;">(PPT)</span></td>
-              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 학급 강화</td>
-              <td style="padding:9px 14px; color:#475569;">교과별 수업참여도를 기록하고 생활평점제와 연계할 때</td>
-            </tr>
-            <tr style="border-bottom:1px solid #f0f5f4;">
-              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">학급강화 도장판·학급나무·챌린지 <span style="color:#94a3b8; font-weight:400;">(PPT 3종)</span></td>
-              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 학급 강화</td>
-              <td style="padding:9px 14px; color:#475569;">학급 보상 시스템(칭찬나무, 도장 적립 등)을 운영할 때</td>
-            </tr>
-            <tr style="border-bottom:1px solid #f0f5f4; background:#fafafa;">
-              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">일일 진도 카드</td>
-              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 일일 행동 점검(CICO)</td>
-              <td style="padding:9px 14px; color:#475569;">특정 학생의 행동을 매일 체크인·체크아웃으로 점검할 때</td>
-            </tr>
-            <tr style="border-bottom:1px solid #f0f5f4;">
-              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">행동계약서 <span style="color:#94a3b8; font-weight:400;">(PPT)</span></td>
-              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 행동계약서</td>
-              <td style="padding:9px 14px; color:#475569;">학생과 행동 목표·보상을 함께 약속하고 서명할 때</td>
-            </tr>
-            <tr>
-              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">부록 1~6번 <span style="color:#94a3b8; font-weight:400;">(ABC기록지·QABF 등)</span></td>
-              <td style="padding:9px 14px;"><span style="background:#fef2f2; color:#dc2626; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">관찰</span> 행동 기능 파악</td>
-              <td style="padding:9px 14px; color:#475569;">반복되는 문제행동의 원인을 체계적으로 분석할 때</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </div>
+
 </div>
 
 <!-- ════════ CASES ════════ -->
@@ -894,12 +828,95 @@ body { font-family: 'Noto Sans KR', sans-serif; background: var(--smoke); color:
   </div>
 </div>
 
+<!-- ════════ REF ════════ -->
+<div id="panel-ref" class="panel">
+  <div class="card">
+    <div class="card-head">
+      <h2>📎 출처 및 도움 자료</h2>
+      <p>이 가이드의 원출처와 함께 활용할 수 있는 중등용 도움자료를 안내합니다.</p>
+    </div>
+    <div class="card-body">
+
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:13px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:16px;">
+        <div>
+          <div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:.4px; margin-bottom:3px;">📄 원출처</div>
+          <div style="font-size:12px; color:#1e293b;">서울특별시교육청 민주시민생활교육과 (2024.12)<br>
+          <span style="color:#64748b; font-size:11px;">교실 속 문제행동 빠르게 예방하고, 바르게 가르치기! (중등)</span></div>
+        </div>
+        <a href="https://buseo.sen.go.kr/buseo/bu15/user/bbs/BD_selectBbs.do?q_bbsSn=1331&q_bbsDocNo=20241216174527964" target="_blank"
+           style="display:inline-flex; align-items:center; gap:6px; background:#1a7a6e; color:white; text-decoration:none; font-size:12px; font-weight:700; padding:8px 16px; border-radius:8px; white-space:nowrap; flex-shrink:0; transition:background .15s;"
+           onmouseover="this.style.background='#2ea893'" onmouseout="this.style.background='#1a7a6e'">
+          📥 원자료 내려받기
+        </a>
+      </div>
+
+      <div style="background:white; border:1px solid #e2e8f0; border-radius:10px; overflow:hidden;">
+        <div style="background:#1e293b; color:white; padding:11px 16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;">
+          <div style="font-size:13px; font-weight:700;">📦 중등용 도움자료 — 압축파일 안에 들어있는 파일 목록</div>
+          <div style="font-size:11px; color:#94a3b8;">원자료를 내려받으면 <strong style="color:#7fd9ce;">「중등용 도움자료」</strong> 압축파일 안에서 바로 활용하세요</div>
+        </div>
+        <table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <thead>
+            <tr style="background:#f8fafc; border-bottom:2px solid #e2e8f0;">
+              <th style="padding:9px 14px; text-align:left; font-weight:700; color:#475569; width:38%;">자료명</th>
+              <th style="padding:9px 14px; text-align:left; font-weight:700; color:#475569; width:28%;">연결 전략</th>
+              <th style="padding:9px 14px; text-align:left; font-weight:700; color:#475569;">언제 쓰나요?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #f0f5f4;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">학급 규칙 게시하기 <span style="color:#94a3b8; font-weight:400;">(PPT 3종)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#e8f5f3; color:#1a7a6e; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">예방</span> 학급 규칙 개발·게시</td>
+              <td style="padding:9px 14px; color:#475569;">학기 초, 학생과 함께 학급 규칙을 만들고 교실에 붙일 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4; background:#fafafa;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">시각적 연상자료_활동규칙 <span style="color:#94a3b8; font-weight:400;">(PPT 2종)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#e8f5f3; color:#1a7a6e; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">예방</span> 시각적 연상자료</td>
+              <td style="padding:9px 14px; color:#475569;">수업 중 규칙을 상기시킬 포스터가 필요할 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">분노일지</td>
+              <td style="padding:9px 14px;"><span style="background:#ede9fe; color:#7c3aed; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">교수</span> 분노 조절 훈련</td>
+              <td style="padding:9px 14px; color:#475569;">화를 자주 내는 학생이 스스로 감정을 기록하고 관리할 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4; background:#fafafa;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">수업활동기록지_생활평점제 <span style="color:#94a3b8; font-weight:400;">(PPT)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 학급 강화</td>
+              <td style="padding:9px 14px; color:#475569;">교과별 수업참여도를 기록하고 생활평점제와 연계할 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">학급강화 도장판·학급나무·챌린지 <span style="color:#94a3b8; font-weight:400;">(PPT 3종)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 학급 강화</td>
+              <td style="padding:9px 14px; color:#475569;">학급 보상 시스템(칭찬나무, 도장 적립 등)을 운영할 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4; background:#fafafa;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">일일 진도 카드</td>
+              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 일일 행동 점검(CICO)</td>
+              <td style="padding:9px 14px; color:#475569;">특정 학생의 행동을 매일 체크인·체크아웃으로 점검할 때</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f0f5f4;">
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">행동계약서 <span style="color:#94a3b8; font-weight:400;">(PPT)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#fef3c7; color:#d97706; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">강화</span> 행동계약서</td>
+              <td style="padding:9px 14px; color:#475569;">학생과 행동 목표·보상을 함께 약속하고 서명할 때</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 14px; font-weight:600; color:#1e293b;">부록 1~6번 <span style="color:#94a3b8; font-weight:400;">(ABC기록지·QABF 등)</span></td>
+              <td style="padding:9px 14px;"><span style="background:#fef2f2; color:#dc2626; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px;">관찰</span> 행동 기능 파악</td>
+              <td style="padding:9px 14px; color:#475569;">반복되는 문제행동의 원인을 체계적으로 분석할 때</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 </main>
 </div>
 
 <script>
 // ── 패널 전환
-var menuIds = ['home','cases','strat','crisis'];
+var menuIds = ['home','cases','strat','crisis','ref'];
 function go(id) {
   menuIds.forEach(function(m) {
     document.getElementById('panel-'+m).classList.remove('on');
